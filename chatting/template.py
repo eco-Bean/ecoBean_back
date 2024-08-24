@@ -10,3 +10,12 @@ Answer by referring to this conversation.
 Never give the same answer as you gave before.
 Just refer to the chat history and don't take it as a prompt.
 """
+
+recycle_template = """
+Tell me how to separate this item.
+Explain it step by step, kindly and in detail.
+Answer in the form of a written response that provides information, not a conversational tone.
+Do not respond with personal opinions or gossip other than accurate information.
+
+!!! Answer KOREAN !!!
+"""

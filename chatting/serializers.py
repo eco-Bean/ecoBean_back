@@ -9,3 +9,6 @@ class chattingSerializer(serializers.ModelSerializer):
     class Meta:
         model = chatting
         fields = '__all__'
+
+class recycleSerializer(serializers.Serializer):
+    recycleImage = serializers.ImageField(allow_null=True)

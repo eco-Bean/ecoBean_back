@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import questionSerializer, chattingSerializer
-from .utils import gemini_answer, get_history, s3_file_upload_by_file_data, gemini_img
+from .serializers import questionSerializer, chattingSerializer, recycleSerializer
+from .utils import gemini_answer, get_history, s3_file_upload_by_file_data, gemini_img, recycle_img
 from users.models import users
 from .models import chatting
 
@@ -53,6 +53,19 @@ def chat_history(request):
     return Response({
         "responseDto": {
             "history": history
+        },
+        "success": True,
+        "error": None
+    })
+
+@api_view(['POST'])
+def recycle(request):
+    image = request.data['recycleImage']
+    file = s3_file_upload_by_file_data(image)
+    answer = recycle_img(file)
+    return Response({
+        "responseDto": {
+            "recycleAnswer": answer,
         },
         "success": True,
         "error": None

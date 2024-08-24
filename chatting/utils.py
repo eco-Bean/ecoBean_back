@@ -1,7 +1,7 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from .template import ecoBeanBot, history_template
+from .template import ecoBeanBot, history_template, recycle_template
 from langchain_teddynote.models import MultiModal
 from .models import chatting
 import boto3
@@ -47,6 +47,17 @@ def gemini_img(messageQuestion, messageFile, history):
         ret += i.content
     return ret
 
+def recycle_img(messageFile):
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest")
+
+    multimodal_gemini = MultiModal(
+        llm, system_prompt=recycle_template, user_prompt="이 물건은 어떻게 분리수거해?"
+    )
+    answer = multimodal_gemini.stream(messageFile)
+    ret = ''
+    for i in answer:
+        ret += i.content
+    return ret
 
 def get_history(user_id):
     try:
