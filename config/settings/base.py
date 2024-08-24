@@ -45,6 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'chatting',
+    'product',
+    'storages',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -83,9 +88,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': get_env_variable("DB_NAME"),
+        'USER': get_env_variable("DB_USER"),
+        'PASSWORD': get_env_variable("DB_PASSWORD"),
+        'HOST': get_env_variable("DB_HOST"),
+        'PORT': get_env_variable("DB_PORT"),
+    },
+    'OPTIONS': {
+        'charset': 'utf8mb4',
+        'use_unicode': True,
+    },
 }
 
 
@@ -129,3 +142,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+###########################AWS
+AWS_ACCESS_KEY_ID = get_env_variable("AWS_ACCESS_KEY") # .csv 파일에 있는 내용을 입력 Access key ID
+AWS_SECRET_ACCESS_KEY = get_env_variable("AWS_SECRET_ACCESS_KEY") # .csv 파일에 있는 내용을 입력 Secret access key
+AWS_REGION = 'ap-northeast-2'
+
+###S3 Storages
+AWS_STORAGE_BUCKET_NAME = get_env_variable("BUCKET_NAME") # 설정한 버킷 이름
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME,AWS_REGION)
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'C:\Users\su\PycharmProjects\ecoBean_back\media')
