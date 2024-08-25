@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'storages',
     'rest_framework',
     'main',
+    'mypage',
 ]
 
 MIDDLEWARE = [
