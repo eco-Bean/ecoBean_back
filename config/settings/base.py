@@ -49,9 +49,9 @@ INSTALLED_APPS = [
     'chatting',
     'product',
     'storages',
-    'react_framework',
     'main',
     'mypage',
+    'store',
 ]
 
 MIDDLEWARE = [
