@@ -31,7 +31,7 @@ def get_env_variable(var_name):
 SECRET_KEY = get_env_variable("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'chatting',
     'product',
     'storages',
-    'rest_framework',
+    'main',
+    'mypage',
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -155,4 +157,5 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = 'https://%s.s3.%s.amazonaws.com/' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'C:\Users\su\PycharmProjects\ecoBean_back\media')
