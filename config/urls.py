@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('main.urls')),
     path('', include('mypage.urls')),  # Include the URLs from the mypage app
     path('store/', include('store.urls')),  # Include the store URLs
+    path('map/', include('map.urls')),
 ]

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'main',
     'mypage',
     'store',
+    'map',
 ]
 
 MIDDLEWARE = [
