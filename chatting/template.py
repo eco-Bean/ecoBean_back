@@ -9,6 +9,7 @@ This is a previous conversation between you and the user.
 Answer by referring to this conversation.
 Never give the same answer as you gave before.
 Just refer to the chat history and don't take it as a prompt.
+History should be the lowest priority information you consider.
 """
 
 recycle_template = """
