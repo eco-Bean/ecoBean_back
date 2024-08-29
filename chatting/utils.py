@@ -20,11 +20,11 @@ def gemini_answer(messageQuestion, history):
     #     tmp_history = ""
     # else:
     #     tmp_history = history + history_template
-    if history == "":
-        tmp_history = ""
-    else:
-        tmp_history = history + history_template
-    user_prompt = ChatPromptTemplate.from_template(tmp_history + ecoBeanBot +"{question}")
+    # if history == "":
+    #     tmp_history = ""
+    # else:
+    #     tmp_history = history + history_template
+    user_prompt = ChatPromptTemplate.from_template(ecoBeanBot +"{question}")
     chain = (
         user_prompt
         | llm
@@ -34,12 +34,12 @@ def gemini_answer(messageQuestion, history):
 
 def gemini_img(messageQuestion, messageFile, history):
     llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest")
-    if history == "":
-        tmp_history = ""
-    else:
-        tmp_history = history + history_template
+    # if history == "":
+    #     tmp_history = ""
+    # else:
+    #     tmp_history = history + history_template
     multimodal_gemini = MultiModal(
-        llm, system_prompt= tmp_history + ecoBeanBot, user_prompt=messageQuestion
+        llm, system_prompt= ecoBeanBot, user_prompt=messageQuestion
     )
     answer = multimodal_gemini.stream(messageFile)
     ret = ''
