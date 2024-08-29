@@ -63,9 +63,12 @@ def recycle(request):
     image = request.data['recycleImage']
     file = s3_file_upload_by_file_data(image)
     answer = recycle_img(file)
+    text = answer.split('-')[0]
+    item = answer.split('-')[1]
     return Response({
         "responseDto": {
-            "recycleAnswer": answer,
+            "recycleAnswer": text,
+            "recycleItem": item
         },
         "success": True,
         "error": None
